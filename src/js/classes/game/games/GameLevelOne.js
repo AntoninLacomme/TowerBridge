@@ -3,9 +3,11 @@ class GameLevelOne extends Game {
 
     constructor () {
         super ();
+
+        this.map = new MapLevelOne ();
     }
 
-    run () {
-        super.run ();
+    run (ctx) {
+        super.run (ctx);
     }
 }

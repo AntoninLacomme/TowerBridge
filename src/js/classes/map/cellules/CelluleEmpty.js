@@ -1,0 +1,4 @@
+
+class CelluleEmpty extends Cellule {
+    
+}
