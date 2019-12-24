@@ -1,5 +1,9 @@
-canvas#canvasFullBackground {
+canvas#canvasFullBackground, canvas#canvasFullBackgroundEvents {
     position: absolute;
     top: 0px;
     left: 0px;
+}
+
+canvas#canvasFullBackground {
+    background-color: rgb(100, 100, 100);
 }

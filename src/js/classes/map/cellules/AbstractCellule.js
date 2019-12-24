@@ -9,8 +9,12 @@ class Cellule {
         this.coordx = x;
         this.coordy = y;
 
-        this.posx = MARGE + this.coordx * WIDTHCELLULE;
-        this.posy = MARGE + this.coordy * WIDTHCELLULE;
+        this.posx = MARGE + this.coordx * SIDEWIDTHCELLULE;
+        this.posy = MARGE + this.coordy * SIDEHEIGHTCELLULE + (this.coordy * (RADIUSCELLULE - SIDEHEIGHTCELLULE) / 2);
+
+        if (this.coordy % 2 == 1) {
+            this.posx += SIDEWIDTHCELLULE / 2;
+        }
 
         this.isFocus = false;
     }
@@ -23,9 +27,9 @@ class Cellule {
         this.isFocus = false;
     }
 
-    contains (x, y) {
-        if (x >= this.posx && x < this.posx + WIDTHCELLULE) {
-            if (y >= this.posy && y < this.posy + WIDTHCELLULE) {
+    isRectContains (x, y, ancre) {
+        if ((x > this.posx + LISTPOINTS[2].x - ancre.x) && (x < this.posx + LISTPOINTS[4].x - ancre.x)) {
+            if ((y > this.posy + LISTPOINTS[3].y - ancre.y) && (y < this.posy + LISTPOINTS[0].y - ancre.y)) {
                 return true;
             }
         }
@@ -41,7 +45,13 @@ class Cellule {
         if (this.isFocus) {
             ctx.globalAlpha = 0.2;
             ctx.fillStyle = "ivory";
-            ctx.fillRect (0, 0, WIDTHCELLULE, WIDTHCELLULE);
+            ctx.beginPath ();
+            LISTPOINTS.forEach((value, index) => {
+                if (index == 0) { ctx.moveTo (value.x, value.y); }
+                ctx.lineTo (value.x, value.y);
+            });
+            ctx.closePath ();
+            ctx.fill ();
         }
         ctx.restore ();
     }
@@ -49,7 +59,14 @@ class Cellule {
     drawBackground (ctx) {
         ctx.save ();
         ctx.fillStyle = "purple";
-        ctx.fillRect (0, 0, WIDTHCELLULE, WIDTHCELLULE);
+        ctx.beginPath ();
+        LISTPOINTS.forEach((value, index) => {
+            if (index == 0) { ctx.moveTo (value.x, value.y); }
+            ctx.lineTo (value.x, value.y);
+        });
+        ctx.closePath ();
+        ctx.fill ();
+        ctx.stroke ();
         ctx.restore ();
     }
 }

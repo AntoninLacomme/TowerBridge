@@ -4,6 +4,6 @@ class MapLevelOne extends Map {
     constructor () {
         super ();
 
-        this.dataMap = this.createEmptyDataMap (10, 10);
+        this.dataMap = this.createEmptyDataMap (50, 30);
     }
 }
