@@ -1,4 +1,4 @@
-canvas#canvasFullBackground, canvas#canvasFullBackgroundEvents {
+canvas#canvasFullBackground, canvas#canvasFullAnimation, canvas#canvasFullBackgroundEvents {
     position: absolute;
     top: 0px;
     left: 0px;

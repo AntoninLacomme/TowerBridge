@@ -3,7 +3,8 @@ class MapLevelOne extends Map {
 
     constructor () {
         super ();
-
-        this.dataMap = this.createEmptyDataMap (50, 30);
+        this.nbLines = 30;
+        this.nbColumns = 50;
+        this.dataMap = this.createGrassDataMap (this.nbColumns, this.nbLines);
     }
 }

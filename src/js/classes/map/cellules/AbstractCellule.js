@@ -27,9 +27,9 @@ class Cellule {
         this.isFocus = false;
     }
 
-    isRectContains (x, y, ancre) {
-        if ((x > this.posx + LISTPOINTS[2].x - ancre.x) && (x < this.posx + LISTPOINTS[4].x - ancre.x)) {
-            if ((y > this.posy + LISTPOINTS[3].y - ancre.y) && (y < this.posy + LISTPOINTS[0].y - ancre.y)) {
+    isRectContains (x, y) {
+        if ((x > this.posx + LISTPOINTS[2].x) && (x < this.posx + LISTPOINTS[4].x)) {
+            if ((y > this.posy + LISTPOINTS[3].y) && (y < this.posy + LISTPOINTS[0].y)) {
                 return true;
             }
         }
@@ -39,9 +39,7 @@ class Cellule {
     drawCellule (ctx) {
         ctx.save ();
         ctx.translate (this.posx, this.posy);
-
         this.drawBackground (ctx);
-
         if (this.isFocus) {
             ctx.globalAlpha = 0.2;
             ctx.fillStyle = "ivory";

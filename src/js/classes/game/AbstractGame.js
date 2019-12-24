@@ -21,10 +21,14 @@ class Game {
 
     clicUp (event) {
         this.desactiveScroll ();
+        this.drawMap (ctx);
     }
 
     mouseMoveOn (event) {
-        if (this.onscroll) { this.map.scroll (this.mouse.x - event.offsetX, this.mouse.y - event.offsetY); }
+        if (this.onscroll) {
+            this.map.scroll (this.mouse.x - event.offsetX, this.mouse.y - event.offsetY);
+            this.drawMap (ctx);
+        }
 
         this.mouse.x = event.offsetX;
         this.mouse.y = event.offsetY;
@@ -46,6 +50,10 @@ class Game {
     // fait "vivre" le jeu
     run (ctx) {
         this.timerFrame++;
+        this.map.drawActualCellFocus (ctx);
+    }
+
+    drawMap (ctx) {
         this.map.drawCellules (ctx);
     }
 }
