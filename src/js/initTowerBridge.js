@@ -27,15 +27,18 @@ function initialize () {
 }
 
 function resizeAll () {
-    canvas.width = window.innerWidth;
+    canvas.width = window.innerWidth - WIDTHMENU;
     canvas.height = window.innerHeight;
 
-    canvasAnimation.width = window.innerWidth;
-    canvasAnimation.height = window.innerHeight;
+    canvasAnimation.width = canvas.width;
+    canvasAnimation.height = canvas.height;
 
-    canvasEvents.width = window.innerWidth;
-    canvasEvents.height = window.innerHeight;
+    canvasEvents.width = canvas.width;
+    canvasEvents.height = canvas.height;
 
+    divMenu.style.height = canvas.height + "px";
+
+    game.calculDiameters ();
     game.drawMap (ctx);
 }
 

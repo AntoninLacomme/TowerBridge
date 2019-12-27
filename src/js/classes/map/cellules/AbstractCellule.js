@@ -40,7 +40,7 @@ class Cellule {
         ctx.save ();
         ctx.translate (this.posx, this.posy);
         this.drawBackground (ctx);
-        if (this.isFocus) {
+        if (ctx.canvas != canvas && this.isFocus) {
             ctx.globalAlpha = 0.2;
             ctx.fillStyle = "ivory";
             ctx.beginPath ();

@@ -7,3 +7,31 @@ canvas#canvasFullBackground, canvas#canvasFullAnimation, canvas#canvasFullBackgr
 canvas#canvasFullBackground {
     background-color: rgb(100, 100, 100);
 }
+
+div#divMainMenu {
+    border-left: solid thin black;
+    background-color: rgb(100, 100, 100);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+div#divPause {
+    background-color: rgba(100, 100, 100, 0.5);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+div.buttonTowerBridge {
+    background-color: green;
+    border-radius: 20px;
+    border: solid thin black;
+    width: 260px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    text-align: center;
+    cursor: default;
+}

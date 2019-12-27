@@ -12,14 +12,20 @@ class Map {
         this.actualCelluleFocus = null;
     }
 
+    calculDiameters () {
+        let lastCell = (this.dataMap[this.dataMap.length - 1][this.dataMap[this.dataMap.length - 1].length - 1]);
+        this.limHeight = lastCell.posy + 3 * RADIUSCELLULE - canvas.height;
+        this.linWidth = lastCell.posx + 3 * RADIUSCELLULE - canvas.width;
+    }
+
     scroll (n, m) {
         this.ancre.x += n;
         this.ancre.y += m;
 
         if (this.ancre.x < -RADIUSCELLULE) { this.ancre.x = -RADIUSCELLULE; }
-        else if (this.ancre.x > RADIUSCELLULE*this.nbColumns ) { this.ancre.x = RADIUSCELLULE*this.nbColumns; }
-        if (this.ancre.y < -RADIUSCELLULE) { this.ancre.y = -RADIUSCELLULE; }
-        else if (this.ancre.y > RADIUSCELLULE*(this.nbLines - 1) ) { this.ancre.y = RADIUSCELLULE*(this.nbLines - 1); }
+        else if (this.ancre.x > this.linWidth) { this.ancre.x = this.linWidth; }
+        if (this.ancre.y < -SIDEHEIGHTCELLULE / 2) { this.ancre.y = -SIDEHEIGHTCELLULE / 2; }
+        else if (this.ancre.y > this.limHeight) { this.ancre.y = this.limHeight; }
     }
 
     setFocusCell (cellule) {
@@ -108,7 +114,7 @@ class Map {
         try {
             this.actualCelluleFocus.drawCellule (ctx);
         }
-        catch (e) { console.log(e); }
+        catch (e) { }
 
         ctx.restore ();
     }

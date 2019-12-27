@@ -1,11 +1,14 @@
 var canvas, ctx;
+var divMenu;
 var canvasAnimation, ctxAnim;
 var game;
 var RADIUSCELLULE = 40;
 var MARGE = 60;
 var SIDEHEIGHTCELLULE = (RADIUSCELLULE * 2 * Math.acos(Math.PI / 6)) | 0;
 var SIDEWIDTHCELLULE = (RADIUSCELLULE * 2 * Math.sin((SIDEHEIGHTCELLULE / 2) / RADIUSCELLULE));
+var SIDECOTE = RADIUSCELLULE * Math.asin (30 / RADIUSCELLULE);
 var LISTPOINTS = calculListPoints ();
+var WIDTHMENU = 0;
 
 
 function calculListPoints () {
