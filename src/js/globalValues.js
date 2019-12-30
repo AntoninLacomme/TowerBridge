@@ -1,5 +1,5 @@
 var canvas, ctx;
-var divMenu;
+var divMenu, divInformation;
 var canvasAnimation, ctxAnim;
 var game;
 var RADIUSCELLULE = 40;
@@ -9,6 +9,10 @@ var SIDEWIDTHCELLULE = (RADIUSCELLULE * 2 * Math.sin((SIDEHEIGHTCELLULE / 2) / R
 var SIDECOTE = RADIUSCELLULE * Math.asin (30 / RADIUSCELLULE);
 var LISTPOINTS = calculListPoints ();
 var WIDTHMENU = 0;
+
+
+
+var GOLDBYWORKERINMINE = 10;
 
 
 function calculListPoints () {

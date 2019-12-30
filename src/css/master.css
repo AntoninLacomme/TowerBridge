@@ -1,3 +1,7 @@
+html {
+    overflow-x: hidden;
+}
+
 canvas#canvasFullBackground, canvas#canvasFullAnimation, canvas#canvasFullBackgroundEvents {
     position: absolute;
     top: 0px;
@@ -14,6 +18,11 @@ div#divMainMenu {
     position: absolute;
     top: 0px;
     right: 0px;
+}
+
+div#divInformation {
+    position: absolute;
+    bottom: 0px;
 }
 
 div#divPause {

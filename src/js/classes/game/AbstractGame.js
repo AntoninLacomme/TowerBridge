@@ -32,6 +32,12 @@ class Game {
         // la map
         this.map = null;
         this.pause = false;
+
+        // les ressources
+        this.actualMoney = 0;
+        this.actualWood = 0;
+        this.actualStone = 0;
+        this.actualMana = 0;
     }
 
     bindingKeyEvent (event) {
@@ -58,6 +64,19 @@ class Game {
         this.mouse.y = event.offsetY;
 
         this.map.setActualCelluleFocus (this.mouse.x, this.mouse.y);
+    }
+
+    onclick (event) {
+        this.map.userClick (event.offsetX, event.offsetY);
+    }
+
+    showMessage (x, y, message) {
+        console.log(x, y, message);
+    }
+
+
+    addMoney (money) {
+        this.actualMoney += money;
     }
 
 
@@ -104,6 +123,10 @@ class Game {
     run (ctx) {
         if (!this.pause) {
             this.timerFrame++;
+            // activation des effets de toutes les cellules de la carte
+            this.map.activateEffectsCellules ();
+
+            // dessin
             this.map.drawActualCellFocus (ctx);
         }
     }

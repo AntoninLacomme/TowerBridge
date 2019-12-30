@@ -17,6 +17,7 @@ function initialize () {
     canvasEvents.onmousemove = function (event) { game.mouseMoveOn (event); }
     canvasEvents.onmousedown = function (event) { game.clicDown (); }
     canvasEvents.onmouseup = function (event) { game.clicUp (); }
+    canvasEvents.onclick = function (event) { game.onclick (event); }
     document.body.appendChild (canvas);
     document.body.appendChild (canvasAnimation);
     document.body.appendChild (canvasEvents);

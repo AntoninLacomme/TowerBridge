@@ -10,6 +10,15 @@ class Map {
         this.ancre = {x: 0, y: 0}
 
         this.actualCelluleFocus = null;
+        this.actualCelluleCliqued = null;
+    }
+
+    activateEffectsCellules () {
+        this.dataMap.forEach((line) => {
+            line.forEach((cellule) => {
+                cellule.effectCellule ();
+            });
+        });
     }
 
     calculDiameters () {
@@ -26,6 +35,24 @@ class Map {
         else if (this.ancre.x > this.linWidth) { this.ancre.x = this.linWidth; }
         if (this.ancre.y < -SIDEHEIGHTCELLULE / 2) { this.ancre.y = -SIDEHEIGHTCELLULE / 2; }
         else if (this.ancre.y > this.limHeight) { this.ancre.y = this.limHeight; }
+    }
+
+    userClick (x, y) {
+        try {
+            if (this.actualCelluleCliqued.coordx == this.actualCelluleFocus.coordx &&
+                this.actualCelluleCliqued.coordy == this.actualCelluleFocus.coordy) {
+                this.actualCelluleCliqued = null;
+                destroyInformations ();
+                return;
+            }
+        }
+        catch (e) { }
+        if (this.actualCelluleFocus != null && this.actualCelluleFocus.isRectContains (x, y)) {
+            this.actualCelluleCliqued = this.actualCelluleFocus;
+            console.log(this.actualCelluleCliqued);
+            this.actualCelluleCliqued.showInformations ();
+            return;
+        }
     }
 
     setFocusCell (cellule) {

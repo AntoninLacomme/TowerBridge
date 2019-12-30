@@ -19,6 +19,14 @@ class Cellule {
         this.isFocus = false;
     }
 
+    showInformations () {
+        destroyInformations ();
+    }
+
+    effectCellule () {
+        // do nothing
+    }
+
     activeFocus () {
         this.isFocus = true;
     }
@@ -41,6 +49,7 @@ class Cellule {
         ctx.translate (this.posx, this.posy);
         this.drawBackground (ctx);
         if (ctx.canvas != canvas && this.isFocus) {
+            ctx.save ();
             ctx.globalAlpha = 0.2;
             ctx.fillStyle = "ivory";
             ctx.beginPath ();
@@ -50,6 +59,9 @@ class Cellule {
             });
             ctx.closePath ();
             ctx.fill ();
+            ctx.restore ();
+
+            this.drawEffectActive (ctx);
         }
         ctx.restore ();
     }
@@ -66,5 +78,9 @@ class Cellule {
         ctx.fill ();
         ctx.stroke ();
         ctx.restore ();
+    }
+
+    drawEffectActive (ctx) {
+        // do nothing
     }
 }

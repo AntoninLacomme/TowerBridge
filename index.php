@@ -8,6 +8,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="src/css/master.css">
+    <link rel="stylesheet" href="src/css/animation.css">
     <title>TowerBridge</title>
 
     <?php
