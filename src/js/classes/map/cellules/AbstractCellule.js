@@ -20,7 +20,9 @@ class Cellule {
     }
 
     showInformations () {
-        destroyInformations ();
+        this.inf = new Information ();
+        this.inf.setTitle (this.title);
+        this.inf.setCoords (this.coordx, this.coordy);
     }
 
     effectCellule () {
@@ -33,6 +35,49 @@ class Cellule {
 
     desactiveFocus () {
         this.isFocus = false;
+    }
+
+    getAdjacentLeft () {
+        return {x: this.coordx - 1, y: this.coordy};
+    }
+
+    getAdjacentRight () {
+        return {x: this.coordx + 1, y: this.coordy};
+    }
+
+    getAdjacentTopLeft () {
+        let acc = 0;
+        if (this.coordy % 2 == 1) { acc = 1; }
+        return {x: this.coordx - 1 + acc, y: this.coordy - 1  }
+    }
+
+    getAdjacentTopRight () {
+        let acc = 0;
+        if (this.coordy % 2 == 1) { acc = 1; }
+        return {x: this.coordx + acc, y: this.coordy -1 }
+    }
+
+    getAdjacentDownLeft () {
+        let acc = 0;
+        if (this.coordy % 2 == 1) { acc = 1; }
+        return {x: this.coordx - 1 + acc, y: this.coordy + 1  }
+    }
+
+    getAdjacentDownRight () {
+        let acc = 0;
+        if (this.coordy % 2 == 1) { acc = 1; }
+        return {x: this.coordx + acc, y: this.coordy + 1 }
+    }
+
+    getAllAdjacents () {
+        return [
+          this.getAdjacentLeft (),
+          this.getAdjacentRight (),
+          this.getAdjacentTopLeft (),
+          this.getAdjacentTopRight (),
+          this.getAdjacentDownLeft (),
+          this.getAdjacentDownRight ()
+        ];
     }
 
     isRectContains (x, y) {

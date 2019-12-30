@@ -13,6 +13,10 @@ class Map {
         this.actualCelluleCliqued = null;
     }
 
+    getCellule (x, y) {
+        return this.dataMap[y][x];
+    }
+
     activateEffectsCellules () {
         this.dataMap.forEach((line) => {
             line.forEach((cellule) => {
@@ -37,7 +41,7 @@ class Map {
         else if (this.ancre.y > this.limHeight) { this.ancre.y = this.limHeight; }
     }
 
-    userClick (x, y) {
+    userClick (n, m) {
         try {
             if (this.actualCelluleCliqued.coordx == this.actualCelluleFocus.coordx &&
                 this.actualCelluleCliqued.coordy == this.actualCelluleFocus.coordy) {
@@ -47,9 +51,8 @@ class Map {
             }
         }
         catch (e) { }
-        if (this.actualCelluleFocus != null && this.actualCelluleFocus.isRectContains (x, y)) {
+        if (this.actualCelluleFocus != null && this.actualCelluleFocus.isRectContains (this.ancre.x + n, this.ancre.y + m)) {
             this.actualCelluleCliqued = this.actualCelluleFocus;
-            console.log(this.actualCelluleCliqued);
             this.actualCelluleCliqued.showInformations ();
             return;
         }
@@ -105,6 +108,55 @@ class Map {
             matrice.push (line);
         }
         return matrice;
+    }
+
+    setUpCellulesPathStart (listStarts, path) {
+        for (let i=0; i<listStarts.length; i++) {
+            let base = this.getCellule (listStarts[i].x, listStarts[i].y);
+            let cells = [];
+            path.forEach ((tuple) => {
+                base.getAllAdjacents ().forEach ((tupleAdj) => {
+                    if (tuple.x == tupleAdj.x && tuple.y == tupleAdj.y) {
+                        if (!base.containsPassed (tupleAdj.x, tupleAdj.y)) {
+                            cells.push(tuple);
+                        }
+                    }
+                });
+            });
+
+            if (cells.length == 1) {
+                base.addCelluleNext (cells[0]);
+                this.getCellule (cells[0].x, cells[0].y).addCellulePassed (listStarts[i]);
+                this.setUpCellulesPathStart (cells, path);
+            }
+
+            if (cells.length <= 1) { console.log(base); }
+        }
+    }
+
+    setUpCellulesPathEnd (listEnds, path) {
+        for (let i=0; i<listEnds.length; i++) {
+            let base = this.getCellule (listEnds[i].x, listEnds[i].y);
+            if (base.listCellsPathPassed.length > 0) { return; }
+
+            let cells = [];
+            path.forEach ((tuple) => {
+                base.getAllAdjacents ().forEach ((tupleAdj) => {
+                    if (tuple.x == tupleAdj.x && tuple.y == tupleAdj.y) {
+                        if (!base.containsNext (tupleAdj.x, tupleAdj.y)) {
+                            cells.push(tuple);
+                        }
+                    }
+                });
+            });
+            if (cells.length == 1) {
+                base.addCellulePassed (cells[0]);
+                this.getCellule (cells[0].x, cells[0].y).addCelluleNext (listEnds[i]);
+                this.setUpCellulesPathEnd (cells, path);
+            }
+
+            if (cells.length <= 1) { console.log(base); }
+        }
     }
 
     // retourne une matrice(x, y) dataMap de Cellules Grass
