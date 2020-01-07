@@ -125,6 +125,8 @@ class Cellule {
         ctx.restore ();
     }
 
+    drawBackgroundTurret (ctx) { }
+
     drawEffectActive (ctx) {
         // do nothing
     }

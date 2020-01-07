@@ -8,4 +8,23 @@ class CelluleConstructible extends Cellule {
         }
         this.turret = null;
     }
+
+    addTurret (turret) {
+        this.turret = turret;
+    }
+
+    showInformations () {
+        super.showInformations ();
+        //this.inf.addTurret ();
+    }
+
+    drawBackgroundTurret (ctx) {
+        if (this.turret != null) {
+            ctx.save ();
+            ctx.translate (this.posx, this.posy);
+            console.log(ctx, this.turret);
+            this.turret.drawTurret (ctx);
+            ctx.restore ();
+        }
+    }
 }

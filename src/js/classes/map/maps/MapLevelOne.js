@@ -30,6 +30,8 @@ class MapLevelOne extends Map {
         this.setUpCellulesPathStart (this.listCellulesStart, path);
         this.setUpCellulesPathEnd (this.listCellulesEnd, path);
 
-        console.log(this.getCellule (5, 6));
+
+        this.getCellule (8, 9).addTurret (new TurretTest ());
+        console.log(this.getCellule (8, 9));
     }
 }

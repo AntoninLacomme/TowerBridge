@@ -130,7 +130,7 @@ class Map {
                 this.setUpCellulesPathStart (cells, path);
             }
 
-            if (cells.length <= 1) { console.log(base); }
+            // if (cells.length <= 1) { console.log(base); }
         }
     }
 
@@ -181,6 +181,12 @@ class Map {
         this.dataMap.forEach ((line) => {
             line.forEach ((cellule) => {
                 cellule.drawCellule (ctx);
+            });
+        });
+
+        this.dataMap.forEach ((line) => {
+            line.forEach ((cellule) => {
+                cellule.drawBackgroundTurret (ctxAnim);
             });
         });
         ctx.restore ();
