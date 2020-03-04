@@ -15,6 +15,11 @@ var WIDTHMENU = 0;
 var GOLDBYWORKERINMINE = 10;
 
 
+
+
+var COSTRECRUTEMENTWORKER = 100;
+
+
 function calculListPoints () {
     let pts = [];
     let rotate = Math.PI / 2;

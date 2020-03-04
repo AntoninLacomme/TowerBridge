@@ -12,6 +12,8 @@ class MapLevelOne extends Map {
 
         this.dataMap[2][2] = new CelluleMineGold (2, 2);
 
+        this.dataMap[12][13] = new CelluleTown (13, 12);
+
         for (let i=3; i<8; i++) {
             for (let j=6; j<11; j++) {
                 this.dataMap[i][j] = new CelluleWood (j, i);
@@ -29,9 +31,5 @@ class MapLevelOne extends Map {
         this.listCellulesEnd = [{x: 7, y: 8}];
         this.setUpCellulesPathStart (this.listCellulesStart, path);
         this.setUpCellulesPathEnd (this.listCellulesEnd, path);
-
-
-        this.getCellule (8, 9).addTurret (new TurretTest ());
-        console.log(this.getCellule (8, 9));
     }
 }

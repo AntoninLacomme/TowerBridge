@@ -3,6 +3,8 @@ class CelluleGrass extends CelluleConstructible {
 
     constructor (x, y) {
         super (x, y);
+
+        this.title = "Prairie";
     }
 
     drawBackground (ctx) {

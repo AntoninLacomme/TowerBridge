@@ -183,10 +183,17 @@ class Map {
                 cellule.drawCellule (ctx);
             });
         });
+        ctx.restore ();
+    }
 
+    drawAllTurrets (ctx) {
+        ctx.save ();
+        ctx.translate (-this.ancre.x, -this.ancre.y);
         this.dataMap.forEach ((line) => {
             line.forEach ((cellule) => {
-                cellule.drawBackgroundTurret (ctxAnim);
+                ctx.save ();
+                cellule.drawBackgroundTurret (ctx);
+                ctx.restore ();
             });
         });
         ctx.restore ();

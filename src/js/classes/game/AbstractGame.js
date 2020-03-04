@@ -34,10 +34,13 @@ class Game {
         this.pause = false;
 
         // les ressources
-        this.actualMoney = 0;
+        this.actualMoney = 500;
         this.actualWood = 0;
         this.actualStone = 0;
         this.actualMana = 0;
+        this.actualWorkers = 0;
+
+        this.createDomElementRessources ();
     }
 
     bindingKeyEvent (event) {
@@ -74,9 +77,38 @@ class Game {
         console.log(x, y, message);
     }
 
-
     addMoney (money) {
         this.actualMoney += money;
+        this.actualizeMenu ();
+    }
+
+    recruteWorker (celluleTown) {
+        if (this.actualMoney >= COSTRECRUTEMENTWORKER) {
+            if (celluleTown.ressource > 0) {
+                this.actualMoney += -1 * COSTRECRUTEMENTWORKER;
+                this.actualWorkers += 1;
+                celluleTown.ressource -= 1;
+
+                //this.actualizeMenu ();
+                this.updateGold ();
+                this.updateWorkers ();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    actualizeMenu () {
+        let listRessources = [{name: "Or", classe: "gold", value: this.actualMoney},
+                              {name: "Bois", classe: "wood", value: this.actualWood},
+                              {name: "Pierre", classe: "stone", value: this.actualStone},
+                              {name: "Mana", classe: "mana", value: this.actualMana},
+                              {name: "Travailleurs", classe: "worker", value: this.actualWorkers}];
+
+        listRessources.forEach ((ressource) => {
+            document.querySelector(".ressource-" + ressource.classe).innerHTML = ressource.value;
+        });
+
     }
 
 
@@ -118,6 +150,45 @@ class Game {
         }
     }
 
+    createDomElementRessources () {
+        let divRessources = document.createElement ("div");
+        let table = document.createElement ("table");
+        /*table.style.position = "absolute";
+        table.style.left = (window.innerWidth - WIDTHMENU) + "px";
+        table.style.top = "50px";*/
+        table.style.paddingLeft = "10px";
+        table.className = "ressources";
+        let listRessources = [{name: "Or", classe: "gold", value: this.actualMoney},
+                              {name: "Bois", classe: "wood", value: this.actualWood},
+                              {name: "Pierre", classe: "stone", value: this.actualStone},
+                              {name: "Mana", classe: "mana", value: this.actualMana},
+                              {name: "Travailleurs", classe: "worker", value: this.actualWorkers}];
+
+        listRessources.forEach ((ressource) => {
+            let tr = document.createElement ("tr");
+            let nameRessource = document.createElement ("td");
+            let valueRessource = document.createElement ("td");
+
+            nameRessource.innerHTML = ressource.name;
+            valueRessource.innerHTML = ressource.value;
+
+            valueRessource.className = "ressource-" + ressource.classe;
+
+            tr.appendChild (nameRessource);
+            tr.appendChild (valueRessource);
+            table.appendChild (tr);
+        });
+        document.querySelector("#divMainMenu").appendChild (table);
+    }
+
+    updateGold () {
+        document.querySelector (".ressource-gold").innerHTML = this.actualMoney;
+    }
+
+    updateWorkers () {
+        document.querySelector (".ressource-worker").innerHTML = this.actualWorkers;
+    }
+
     // fonction appelée à chaque frames
     // fait "vivre" le jeu
     run (ctx) {
@@ -128,6 +199,7 @@ class Game {
 
             // dessin
             this.map.drawActualCellFocus (ctx);
+            this.map.drawAllTurrets (ctxAnim);
         }
     }
 
